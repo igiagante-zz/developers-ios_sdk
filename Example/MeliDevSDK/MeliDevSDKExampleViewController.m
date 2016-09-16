@@ -7,7 +7,8 @@
 //
 
 #import "MeliDevSDKExampleViewController.h"
-#import <MeliDevSDK/MeliDevTestViewController.h>
+#import <MeliDevSDK/MeliDevLoginViewController.h>
+#import <MeliDevSDK/Meli.h>
 
 @interface MeliDevSDKExampleViewController ()
 - (IBAction)go:(id)sender;
@@ -37,7 +38,17 @@
 */
 
 - (IBAction)go:(id)sender {
-    MeliDevTestViewController * controller = [[MeliDevTestViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    Meli *meli = [Meli meli];
+    NSError *error;
+    [meli startSDK:&error];
+    
+    if(error) {
+        NSLog(@"Domain: %@", error.domain);
+        NSLog(@"Error Code: %ld", error.code);
+        NSLog(@"Description: %@", [error localizedDescription]);
+    } else {
+        [meli startLogin:self];
+    }
 }
 @end

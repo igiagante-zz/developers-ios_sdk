@@ -4,5 +4,6 @@
 target 'MeliDevSDK' do
   
   pod 'MeliDevSDK', :path => "./"
+  pod 'MBProgressHUD', '~> 1.0.0'
 
 end

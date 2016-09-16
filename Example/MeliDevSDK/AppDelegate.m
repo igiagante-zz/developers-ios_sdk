@@ -23,7 +23,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
     navController.navigationBar.barStyle = UIBarStyleDefault;
-    navController.navigationBar.barTintColor = [UIColor greenColor];
+    navController.navigationBar.barTintColor = [UIColor grayColor];
     navController.navigationBar.tintColor = [UIColor blueColor];
     navController.navigationBar.opaque = YES;
     navController.navigationBar.translucent = NO;

@@ -10,7 +10,6 @@
 		57FB7E371D706DB600454AB5 /* MeliDevSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E361D706DB600454AB5 /* MeliDevSDKTests.m */; };
 		57FB7E581D70804E00454AB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E501D70804E00454AB5 /* AppDelegate.m */; };
 		57FB7E591D70804E00454AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E511D70804E00454AB5 /* Assets.xcassets */; };
-		57FB7E5A1D70804E00454AB5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E531D70804E00454AB5 /* Info.plist */; };
 		57FB7E5B1D70804E00454AB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E541D70804E00454AB5 /* main.m */; };
 		57FB7E5C1D70804E00454AB5 /* MeliDevSDKExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E561D70804E00454AB5 /* MeliDevSDKExampleViewController.m */; };
 		57FB7E5D1D70804E00454AB5 /* MeliDevSDKExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E571D70804E00454AB5 /* MeliDevSDKExampleViewController.xib */; };
@@ -232,7 +231,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FB7E5A1D70804E00454AB5 /* Info.plist in Resources */,
 				57FB7E591D70804E00454AB5 /* Assets.xcassets in Resources */,
 				57FB7E5D1D70804E00454AB5 /* MeliDevSDKExampleViewController.xib in Resources */,
 			);
