@@ -11,6 +11,8 @@
 #import "MBProgressHUD.h"
 
 const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?response_type=token&client_id=";
+const NSString * CALLBACK_LOGIN = @"login";
+const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
 
 @interface MeliDevLoginViewController ()
 
@@ -56,7 +58,7 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    if([urlString containsString:@"login"] || [urlString containsString:@"background_message_dispatch"]) {
+    if([urlString containsString: CALLBACK_LOGIN] || [urlString containsString: CALLBACK_MESSAGE_DISPATCH]) {
         [self.HUD hideAnimated:TRUE];
     }
     return YES;

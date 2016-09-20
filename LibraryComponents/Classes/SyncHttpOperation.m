@@ -7,6 +7,9 @@
 //
 
 #import "SyncHttpOperation.h"
+#import "MeliDevErrors.h"
+
+static NSString const * MELI_IDENTITY_NIL_KEY = @"Meli Identity is nil";
 
 @implementation SyncHttpOperation
 
@@ -35,6 +38,17 @@
     return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 }
 
+/**
+ * If the identity was not created, the reference to the error will be modified.
+ **/
+- (void) processError: (NSError **) error {
+    NSDictionary *userInfo = @{NSLocalizedDescriptionKey: MELI_IDENTITY_NIL_KEY};
+    
+    *error = [NSError errorWithDomain:MeliDevErrorDomain
+                                         code:MeliIdentityIsNil
+                                     userInfo:userInfo];
+}
+
 - (NSString *) get: (NSString *)path error: (NSError **) error {
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
@@ -49,12 +63,13 @@
 - (NSString *) getWithAuth: (NSString *)path error: (NSError **) error {
     
     if(!self.identity) {
+        [self processError:&error];
         return nil;
     } else {
         
         NSString * url = [MELI_API_URL stringByAppendingString:path];
         url = [url stringByAppendingString: @"?access_token="];
-        url = [url stringByAppendingString: self.identity.accessToken.accessTokenValue];
+        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
@@ -64,34 +79,65 @@
     }
 }
 
+- (NSString *) delete: (NSString *)path error: (NSError **) error {
+    
+    if(!self.identity) {
+        [self processError:&error];
+        return nil;
+    } else {
+        
+        NSString * url = [MELI_API_URL stringByAppendingString:path];
+        url = [url stringByAppendingString: @"?access_token="];
+        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"DELETE"];
+        [request setURL:[NSURL URLWithString:url]];
+        
+        return [self execute:request error:&error];
+    }
+}
+
 - (NSString *) post:(NSString *)path withBody:(NSData *)body error: (NSError **) error {
     
-    NSString * url = [MELI_API_URL stringByAppendingString:path];
-    url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.accessToken.accessTokenValue];
+    if(!self.identity) {
+        [self processError:&error];
+        return nil;
+    } else {
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:body];
-    [request setValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
-    [request setURL:[NSURL URLWithString:url]];
+        NSString * url = [MELI_API_URL stringByAppendingString:path];
+        url = [url stringByAppendingString: @"?access_token="];
+        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
     
-    return [self execute:request error:&error];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:body];
+        [request setValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
+        [request setURL:[NSURL URLWithString:url]];
+    
+        return [self execute:request error:&error];
+    }
 }
 
 - (NSString *) put:(NSString *)path withBody:(NSData *)body error: (NSError **) error {
     
-    NSString * url = [MELI_API_URL stringByAppendingString:path];
-    url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.accessToken.accessTokenValue];
+    if(!self.identity) {
+        [self processError:&error];
+        return nil;
+    } else {
     
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"PUT"];
-    [request setHTTPBody:body];
-    [request setValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
-    [request setURL:[NSURL URLWithString:url]];
+        NSString * url = [MELI_API_URL stringByAppendingString:path];
+        url = [url stringByAppendingString: @"?access_token="];
+        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
     
-    return [self execute:request error:&error];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setHTTPMethod:@"PUT"];
+        [request setHTTPBody:body];
+        [request setValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
+        [request setURL:[NSURL URLWithString:url]];
+    
+        return [self execute:request error:&error];
+    }
 }
 
 @end

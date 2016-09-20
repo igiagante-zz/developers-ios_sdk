@@ -15,12 +15,16 @@ const NSString * USER_ID = @"user_id";
 
 @implementation Identity
 
+- (NSString *) getAccessTokenValue {
+    return _accessToken.accessTokenValue;
+}
+
 + (void) createIdentity:(NSDictionary *) loginData {
     
     Identity * identity = [[Identity alloc]init];
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    identity.clientId = [dictionary valueForKey:@"MeliAppId"];
+    identity.clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
     identity.userId = [loginData valueForKey:USER_ID];
     
     AccessToken *accessToken = [[AccessToken alloc]init];
@@ -51,7 +55,7 @@ const NSString * USER_ID = @"user_id";
 + (Identity *) restoreIdentity {
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    NSString *clientId = [dictionary valueForKey:@"MeliAppId"];
+    NSString *clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
     
     NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
     NSString *clientIdSaved = [defaults valueForKey: CLIENT_ID];

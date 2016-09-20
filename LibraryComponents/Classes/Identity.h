@@ -22,5 +22,6 @@ static const NSString * CLIENT_ID = @"app_id";
 + (Identity *) restoreIdentity;
 
 - (void) storeIdentity;
+- (NSString *) getAccessTokenValue;
 
 @end

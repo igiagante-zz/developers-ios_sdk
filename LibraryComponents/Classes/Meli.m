@@ -12,6 +12,13 @@
 #import "Utils.h"
 #import "MeliDevErrors.h"
 
+static NSString const * MELI_REDIRECT_URL_KEY = @"MeliRedirectUrl";
+
+static NSString const * APP_ID_NOT_DEFINED_KEY = @"App ID is not defined at info.plist";
+static NSString const * REDIRECT_URL_NOT_DEFINED_KEY = @"Redirect URL is not defined at info.plist";
+static NSString const * APP_ID_IS_NOT_NUMERIC_KEY = @"App ID is not numeric";
+static NSString const * REDIRECT_URL_IS_NOT_VALID_KEY = @"Redirect URL is not valid";
+
 @interface Meli ()
 
 @end
@@ -60,8 +67,8 @@ static BOOL isSDKInitialized = NO;
 + (void) startSDK: (NSError **) error {
     dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
     
-    clientId = [dictionary valueForKey:@"MeliAppId"];
-    redirectUrl = [dictionary valueForKey:@"MeliRedirectUrl"];
+    clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
+    redirectUrl = [dictionary valueForKey: MELI_REDIRECT_URL_KEY];
     
     [self verifyAppID:clientId error: &error];
     [self verifyRedirectUrl:redirectUrl error: &error];
@@ -72,13 +79,19 @@ static BOOL isSDKInitialized = NO;
 + (void) verifyAppID: (NSString *) appId error:(NSError **) error {
     
     if(appId == nil) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"App ID is not defined at info.plist"};
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: APP_ID_NOT_DEFINED_KEY};
         
         *error = [NSError errorWithDomain:MeliDevErrorDomain
                                      code:AppIdIsNotDefinedError
                                  userInfo:userInfo];
     } else if( [Utils isNumeric: appId] ) {
         NSLog(@"App ID correct %@", appId);
+    } else {
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: APP_ID_IS_NOT_NUMERIC_KEY};
+
+        *error = [NSError errorWithDomain:MeliDevErrorDomain
+                                     code:AppIdNotValidError
+                                 userInfo:userInfo];
     }
     
 }
@@ -86,7 +99,7 @@ static BOOL isSDKInitialized = NO;
 + (void) verifyRedirectUrl: (NSString *) redirectUrl error:(NSError **) error {
     
     if(redirectUrl == nil) {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"Redirect URL is not defined at info.plist"};
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: REDIRECT_URL_NOT_DEFINED_KEY};
         
         *error = [NSError errorWithDomain:MeliDevErrorDomain
                                      code:RedirectUrlIsNotDefinedError
@@ -94,7 +107,7 @@ static BOOL isSDKInitialized = NO;
     } else if( [Utils validateUrl: redirectUrl] ) {
         NSLog(@"Redirect URL is valid %@", redirectUrl);
     } else {
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"Redirect URL is not valid"};
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: REDIRECT_URL_IS_NOT_VALID_KEY};
         
         *error = [NSError errorWithDomain:MeliDevErrorDomain
                                      code:RedirectUrlNotValidError

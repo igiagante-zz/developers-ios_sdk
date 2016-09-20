@@ -33,7 +33,7 @@
     self.identity = meli.getIdentity;
     
     if(self.identity) {
-        [self testPut];
+        [self testDelete];
     } else {
         [meli startLogin:self];
     }
@@ -45,6 +45,15 @@
     httpClient.identity = self.identity;
     NSString *path = @"/users/221910727/items/search";
     NSString * result =[httpClient getWithAuth:path error:&error];
+    NSLog(@"Result %@", result);
+}
+
+- (void) testDelete {
+    NSError *error;
+    SyncHttpOperation *httpClient = [SyncHttpOperation syncHttpOperation];
+    httpClient.identity = self.identity;
+    NSString *path = @"/items/MLA635779960/pictures/939505-MLA25061434619_092016";
+    NSString * result =[httpClient delete:path error:&error];
     NSLog(@"Result %@", result);
 }
 

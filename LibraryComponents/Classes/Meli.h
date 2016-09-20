@@ -10,6 +10,7 @@
 #import "Identity.h"
 
 static NSString * const MELI_DEV_SUCCESS = @"success";
+static NSString const * MELI_APP_ID_KEY = @"MeliAppId";
 
 @interface Meli : NSObject
 
