@@ -119,10 +119,4 @@ static BOOL isSDKInitialized = NO;
         [clientViewController.navigationController pushViewController:loginViewController animated:YES];
 }
 
-- (BOOL) loadIdentity {
-    identity = [Identity restoreIdentity];
-    return identity.clientId != nil;
-}
-
-
 @end

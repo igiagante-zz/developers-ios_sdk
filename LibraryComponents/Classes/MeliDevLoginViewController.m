@@ -36,8 +36,6 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.HUD.layer.zPosition = 1;
     
-    self.HUD.label.text = @"Login ...";
-    
     [_webView loadRequest:urlRequest];
 }
 
@@ -52,17 +50,13 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
     
     NSLog(@"Url: %@", urlString);
     
-    if([self.HUD isHidden]){
-        [self.HUD showAnimated:YES];
-    }
-    
     if([urlString containsString:self.redirectUrl]) {
         NSArray * parts = [urlString componentsSeparatedByString:@"#"];
         [self getIdentityData:parts[1]];
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    if([urlString containsString:@"login"] || [urlString containsString:@"authorization"]) {
+    if([urlString containsString:@"login"] || [urlString containsString:@"background_message_dispatch"]) {
         [self.HUD hideAnimated:TRUE];
     }
     return YES;
