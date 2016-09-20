@@ -15,6 +15,7 @@ static NSString * const MELI_DEV_SUCCESS = @"success";
 
 + (instancetype) meli;
 
+- (Identity *) getIdentity;
 - (void) startSDK: (NSError **) error;
 - (void) startLogin: (UIViewController *) clientViewController;
 

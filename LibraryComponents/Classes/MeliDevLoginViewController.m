@@ -10,7 +10,7 @@
 #import "Identity.h"
 #import "MBProgressHUD.h"
 
-const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?response_type=token&client_id=7230677288562808";
+const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?response_type=token&client_id=";
 
 @interface MeliDevLoginViewController ()
 
@@ -29,7 +29,8 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
     
     _webView.delegate = self;
     
-    NSURL *url = [NSURL URLWithString:LOGIN_URL];
+    NSString *urlLogin = [LOGIN_URL stringByAppendingString:_appId];
+    NSURL *url = [NSURL URLWithString:urlLogin];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
 
     self.HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -46,11 +47,14 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    
     NSURL *url = [request URL];
     NSString *urlString = url.absoluteString;
     
     NSLog(@"Url: %@", urlString);
+    
+    if([self.HUD isHidden]){
+        [self.HUD showAnimated:YES];
+    }
     
     if([urlString containsString:self.redirectUrl]) {
         NSArray * parts = [urlString componentsSeparatedByString:@"#"];
@@ -58,7 +62,7 @@ const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?respon
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    if([urlString containsString:@"login"]) {
+    if([urlString containsString:@"login"] || [urlString containsString:@"authorization"]) {
         [self.HUD hideAnimated:TRUE];
     }
     return YES;
