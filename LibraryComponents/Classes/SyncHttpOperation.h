@@ -10,6 +10,7 @@
 #import "Identity.h"
 
 static NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
+static NSString * const HTTP_REQUEST_ERROR_MESSAGE = @"Error getting %@, HTTP status code %li";
 
 @interface SyncHttpOperation : NSObject
 

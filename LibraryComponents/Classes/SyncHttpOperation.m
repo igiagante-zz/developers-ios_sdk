@@ -9,7 +9,7 @@
 #import "SyncHttpOperation.h"
 #import "MeliDevErrors.h"
 
-static NSString const * MELI_IDENTITY_NIL_KEY = @"Meli Identity is nil";
+static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
 
 @implementation SyncHttpOperation
 
@@ -31,7 +31,17 @@ static NSString const * MELI_IDENTITY_NIL_KEY = @"Meli Identity is nil";
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     
     if(!([responseCode statusCode] == 200 || [responseCode statusCode] == 201)){
-        NSLog(@"Error getting %@, HTTP status code %i", [request URL], [responseCode statusCode]);
+        
+        NSString * requestError = [NSString stringWithFormat:HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode] ];
+        
+        NSLog(HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode]);
+        
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: requestError};
+        
+        *error = [NSError errorWithDomain:MeliDevErrorDomain
+                                     code:HttpRequestError
+                                 userInfo:userInfo];
+        
         return nil;
     }
     
@@ -42,7 +52,7 @@ static NSString const * MELI_IDENTITY_NIL_KEY = @"Meli Identity is nil";
  * If the identity was not created, the reference to the error will be modified.
  **/
 - (void) processError: (NSError **) error {
-    NSDictionary *userInfo = @{NSLocalizedDescriptionKey: MELI_IDENTITY_NIL_KEY};
+    NSDictionary *userInfo = @{NSLocalizedDescriptionKey: MELI_IDENTITY_NIL_MESSAGE};
     
     *error = [NSError errorWithDomain:MeliDevErrorDomain
                                          code:MeliIdentityIsNil

@@ -11,10 +11,15 @@
 #import <MeliDevSDK/Meli.h>
 #import <MeliDevSDK/Identity.h>
 #import <MeliDevSDK/SyncHttpOperation.h>
+#import <MeliDevSDK/ASyncHttpOperation.h>
+#import <MeliDevSDK/MeliDevErrors.h>
 
 @interface MeliDevSDKExampleViewController ()
 
 @property Identity *identity;
+
+@property (copy) NSString * result;
+@property (nonatomic) NSError * error;
 
 - (IBAction)go:(id)sender;
 
@@ -33,10 +38,77 @@
     self.identity = meli.getIdentity;
     
     if(self.identity) {
-        [self testDelete];
+        [self testPostAsync];
     } else {
         [meli startLogin:self];
     }
+}
+
+- (void) processError: (NSURLSessionTask *) operation error:(NSError *)error {
+    
+    NSURLRequest * request = operation.currentRequest;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation.response;
+    
+    if(!([httpResponse statusCode] == 200 || [httpResponse statusCode] == 201)){
+        
+        NSString * requestError = [NSString stringWithFormat: HTTP_REQUEST_ERROR_MESSAGE, [request URL],
+                                   (long)[httpResponse statusCode] ];
+        NSLog(@"Http request error %@", requestError);
+    }
+}
+
+- (void) parseData: (id) responseObject {
+    
+    NSArray *jsonArray = (NSArray *) responseObject;
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonArray options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Result %@", result);
+}
+
+- (void) getUsersItemsAsync {
+    
+    AsyncHttpOperation *httpClient = [AsyncHttpOperation asyncHttpOperation];
+    httpClient.identity = self.identity;
+    NSString *path = @"/users/221910727/items/search";
+    
+    SuccessHandler successHandler = ^(NSURLSessionTask *task, id responseObject) {
+        [self parseData:responseObject];
+    };
+    
+    FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
+        
+        if(error) {
+            [self processError:operation error:error];
+        }
+    };
+    
+    [httpClient getWithAuth:path successHandler:successHandler failureHanlder:failureHandler];
+}
+
+- (void) testPostAsync {
+    
+    AsyncHttpOperation *httpClient = [AsyncHttpOperation asyncHttpOperation];
+    httpClient.identity = self.identity;
+    NSString *path = @"/items";
+    
+    NSError *error;
+    NSDictionary * params = [NSJSONSerialization JSONObjectWithData:[self createJsonDataForPost] options:kNilOptions error:&error];
+    
+    SuccessHandler successHandler = ^(NSURLSessionTask *task, id responseObject) {
+        [self parseData:responseObject];
+    };
+    
+    FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
+        
+        if(error) {
+            [self processError:operation error:error];
+        }
+    };
+    
+    [httpClient post:path withBody:params successHandler:successHandler failureHanlder:failureHandler];
 }
 
 - (void) getUsersItems {

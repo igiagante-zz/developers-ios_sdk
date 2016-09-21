@@ -6,12 +6,13 @@
 //
 //
 
-static NSString const * MeliDevErrorDomain = @"com.MeliDev.ErrorDomain";
+static NSString * const MeliDevErrorDomain = @"com.MeliDev.ErrorDomain";
 
 enum {
     AppIdNotValidError,
     RedirectUrlNotValidError,
     AppIdIsNotDefinedError,
     RedirectUrlIsNotDefinedError,
-    MeliIdentityIsNil
+    MeliIdentityIsNil,
+    HttpRequestError,
 };
