@@ -7,16 +7,19 @@
 //
 
 #import "MeliDevSDKExampleViewController.h"
-#import <MeliDevSDK/MeliDevLoginViewController.h>
-#import <MeliDevSDK/Meli.h>
-#import <MeliDevSDK/Identity.h>
-#import <MeliDevSDK/SyncHttpOperation.h>
-#import <MeliDevSDK/ASyncHttpOperation.h>
-#import <MeliDevSDK/MeliDevErrors.h>
+#import "MeliDevLoginViewController.h"
+#import "Meli.h"
+#import "MeliDevIdentity.h"
+#import "MeliDevASyncHttpOperation.h"
+#import "MeliDevSyncHttpOperation.h"
+#import "MeliDevErrors.h"
+
+static NSString * CLIENT_ID_VALUE = @"5197208004815569";
+static NSString * REDIRECT_URL_VALUE = @"https://www.example.com";
 
 @interface MeliDevSDKExampleViewController ()
 
-@property Identity *identity;
+@property MeliDevIdentity *identity;
 
 @property (copy) NSString * result;
 @property (nonatomic) NSError * error;
@@ -33,8 +36,17 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    NSError *error;
+    [Meli startSDK: CLIENT_ID_VALUE withRedirectUrl: REDIRECT_URL_VALUE error:&error];
+    
+    if(error) {
+        NSLog(@"Domain: %@", error.domain);
+        NSLog(@"Error Code: %ld", error.code);
+        NSLog(@"Description: %@", [error localizedDescription]);
+    }
 
-    self.identity = [Meli getIdentity];
+    self.identity = [Meli getMeliDevIdentity];
     
     if(self.identity) {
         [self getUsersItemsAsync];
@@ -69,7 +81,7 @@
 
 - (void) getUsersItemsAsync {
     
-    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    MeliDevAsyncHttpOperation *httpClient = [[MeliDevAsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/users/221910727/items/search";
     
@@ -88,7 +100,7 @@
 
 - (void) testDeleteAsync {
     
-    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    MeliDevAsyncHttpOperation *httpClient = [[MeliDevAsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960/pictures/939505-MLA25061434619_092016";
     
@@ -107,7 +119,7 @@
 
 - (void) testPostAsync {
     
-    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    MeliDevAsyncHttpOperation *httpClient = [[MeliDevAsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items";
     
@@ -129,7 +141,7 @@
 
 - (void) testPutAsync {
     
-    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    MeliDevAsyncHttpOperation *httpClient = [[MeliDevAsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960";
     
@@ -151,7 +163,7 @@
 
 - (void) getUsersItems {
     NSError *error;
-    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
+    MeliDevSyncHttpOperation *httpClient = [[MeliDevSyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/users/221910727/items/search";
     NSString * result =[httpClient getWithAuth:path error:&error];
@@ -160,7 +172,7 @@
 
 - (void) testDelete {
     NSError *error;
-    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
+    MeliDevSyncHttpOperation *httpClient = [[MeliDevSyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960/pictures/939505-MLA25061434619_092016";
     NSString * result =[httpClient delete:path error:&error];
@@ -169,7 +181,7 @@
 
 - (void) testPost {
     NSError *error;
-    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
+    MeliDevSyncHttpOperation *httpClient = [[MeliDevSyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items";
     NSString * result =[httpClient post:path withBody:[self createJsonDataForPost] error:&error];
@@ -178,7 +190,7 @@
 
 - (void) testPut {
     NSError *error;
-    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
+    MeliDevSyncHttpOperation *httpClient = [[MeliDevSyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960";
     NSString * result =[httpClient put:path withBody:[self createJsonDataForPut] error:&error];

@@ -1,22 +1,22 @@
 //
-//  AccessToken.m
+//  MeliDevAccessToken.m
 //  Pods
 //
 //  Created by Ignacio Giagante on 1/9/16.
 //
 //
 
-#import "AccessToken.h"
+#import "MeliDevAccessToken.h"
 
-@interface AccessToken ()
+@interface MeliDevAccessToken ()
 
 @property (nonatomic, strong) NSDate * tokenDateExpiration;
 
 @end
 
-@implementation AccessToken
+@implementation MeliDevAccessToken
 
-- (instancetype) initWithAccessToken: (NSString *) token andExpiresIn: (NSString *) expiresIn {
+- (instancetype) initWithMeliDevAccessToken: (NSString *) token andExpiresIn: (NSString *) expiresIn {
     
     self = [super init];
     if(self) {

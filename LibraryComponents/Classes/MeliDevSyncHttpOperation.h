@@ -1,5 +1,5 @@
 //
-//  SyncHttpOperation.h
+//  MeliDevSyncHttpOperation.h
 //  Pods
 //
 //  Created by Ignacio Giagante on 16/9/16.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Identity.h"
+#import "MeliDevIdentity.h"
 
 static NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
 static NSString * const HTTP_REQUEST_ERROR_MESSAGE = @"Error getting %@, HTTP status code %li";
 
-@interface SyncHttpOperation : NSObject
+@interface MeliDevSyncHttpOperation : NSObject
 
-@property (nonatomic) Identity * identity;
+@property (nonatomic) MeliDevIdentity * identity;
 
 - (NSString *) get: (NSString *)path error: (NSError **) error;
 - (NSString *) getWithAuth: (NSString *)path error: (NSError **) error;

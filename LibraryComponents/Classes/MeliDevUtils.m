@@ -1,17 +1,17 @@
 //
-//  Utils.m
+//  MeliDevUtils.m
 //  Pods
 //
 //  Created by Ignacio Giagante on 15/9/16.
 //
 //
 
-#import "Utils.h"
+#import "MeliDevUtils.h"
 
 const NSString * REGEX_URL = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
 const NSString * REGEX_NUMERIC = @"^(?:|0|[1-9]\\d*)(?:\\.\\d*)?$";
 
-@implementation Utils
+@implementation MeliDevUtils
 
 + (BOOL) validateUrl: (NSString *) candidate {
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", REGEX_URL];

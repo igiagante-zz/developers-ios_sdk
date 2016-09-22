@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57FB7E371D706DB600454AB5 /* MeliDevSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E361D706DB600454AB5 /* MeliDevSDKTests.m */; };
+		572574841D9458A800F9FB57 /* MeliDevUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */; };
+		572574861D94609700F9FB57 /* MeliDevAccessTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */; };
+		572574881D94667C00F9FB57 /* MeliDevIdentityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */; };
 		57FB7E581D70804E00454AB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E501D70804E00454AB5 /* AppDelegate.m */; };
 		57FB7E591D70804E00454AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E511D70804E00454AB5 /* Assets.xcassets */; };
 		57FB7E5B1D70804E00454AB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E541D70804E00454AB5 /* main.m */; };
 		57FB7E5C1D70804E00454AB5 /* MeliDevSDKExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E561D70804E00454AB5 /* MeliDevSDKExampleViewController.m */; };
 		57FB7E5D1D70804E00454AB5 /* MeliDevSDKExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E571D70804E00454AB5 /* MeliDevSDKExampleViewController.xib */; };
+		B72FEC6B7A88CF81985A640B /* libPods-MeliDevSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44263AB8AC29723383C17564 /* libPods-MeliDevSDKTests.a */; };
 		C1B91F2C588256429D1583CE /* libPods-MeliDevSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD29E22BDBA9B9540994BC0 /* libPods-MeliDevSDK.a */; };
 /* End PBXBuildFile section */
 
@@ -28,11 +31,12 @@
 
 /* Begin PBXFileReference section */
 		44263AB8AC29723383C17564 /* libPods-MeliDevSDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeliDevSDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevUtilsTests.m; sourceTree = "<group>"; };
+		572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevAccessTokenTests.m; sourceTree = "<group>"; };
+		572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevIdentityTests.m; sourceTree = "<group>"; };
 		57FB7E191D706DB600454AB5 /* MeliDevSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeliDevSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57FB7E1D1D706DB600454AB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57FB7E321D706DB600454AB5 /* MeliDevSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeliDevSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57FB7E361D706DB600454AB5 /* MeliDevSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeliDevSDKTests.m; sourceTree = "<group>"; };
-		57FB7E381D706DB600454AB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57FB7E4F1D70804E00454AB5 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Example/MeliDevSDK/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		57FB7E501D70804E00454AB5 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Example/MeliDevSDK/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		57FB7E511D70804E00454AB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/MeliDevSDK/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -42,7 +46,9 @@
 		57FB7E561D70804E00454AB5 /* MeliDevSDKExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeliDevSDKExampleViewController.m; path = Example/MeliDevSDK/MeliDevSDKExampleViewController.m; sourceTree = SOURCE_ROOT; };
 		57FB7E571D70804E00454AB5 /* MeliDevSDKExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MeliDevSDKExampleViewController.xib; path = Example/MeliDevSDK/MeliDevSDKExampleViewController.xib; sourceTree = SOURCE_ROOT; };
 		5AD29E22BDBA9B9540994BC0 /* libPods-MeliDevSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MeliDevSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		653E4D79F80CDB72CB0995D5 /* Pods-MeliDevSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeliDevSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeliDevSDKTests/Pods-MeliDevSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		B5BF9D8DBA5F1FC4A6D9CB4D /* Pods-MeliDevSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeliDevSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeliDevSDK/Pods-MeliDevSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		BD7ADC9BB919A2088EEE19B4 /* Pods-MeliDevSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeliDevSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeliDevSDKTests/Pods-MeliDevSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D75EDC4A9AF236581816CE89 /* Pods-MeliDevSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeliDevSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeliDevSDK/Pods-MeliDevSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,17 +65,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B72FEC6B7A88CF81985A640B /* libPods-MeliDevSDKTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		572574821D94586B00F9FB57 /* MeliSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */,
+				572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */,
+				572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */,
+			);
+			path = MeliSDKTests;
+			sourceTree = SOURCE_ROOT;
+		};
 		57FB7E101D706DB600454AB5 = {
 			isa = PBXGroup;
 			children = (
 				57FB7E1B1D706DB600454AB5 /* MeliDevSDK */,
-				57FB7E351D706DB600454AB5 /* MeliDevSDKTests */,
+				572574821D94586B00F9FB57 /* MeliSDKTests */,
 				57FB7E1A1D706DB600454AB5 /* Products */,
 				ED05EC6397C016354B071F6B /* Pods */,
 				EB630A609CAAB7B203FCD179 /* Frameworks */,
@@ -110,15 +127,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		57FB7E351D706DB600454AB5 /* MeliDevSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				57FB7E361D706DB600454AB5 /* MeliDevSDKTests.m */,
-				57FB7E381D706DB600454AB5 /* Info.plist */,
-			);
-			path = MeliDevSDKTests;
-			sourceTree = "<group>";
-		};
 		57FB7E521D70804E00454AB5 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +149,8 @@
 			children = (
 				B5BF9D8DBA5F1FC4A6D9CB4D /* Pods-MeliDevSDK.debug.xcconfig */,
 				D75EDC4A9AF236581816CE89 /* Pods-MeliDevSDK.release.xcconfig */,
+				BD7ADC9BB919A2088EEE19B4 /* Pods-MeliDevSDKTests.debug.xcconfig */,
+				653E4D79F80CDB72CB0995D5 /* Pods-MeliDevSDKTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -353,7 +363,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57FB7E371D706DB600454AB5 /* MeliDevSDKTests.m in Sources */,
+				572574861D94609700F9FB57 /* MeliDevAccessTokenTests.m in Sources */,
+				572574881D94667C00F9FB57 /* MeliDevIdentityTests.m in Sources */,
+				572574841D9458A800F9FB57 /* MeliDevUtilsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,9 +488,10 @@
 		};
 		57FB7E3F1D706DB600454AB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD7ADC9BB919A2088EEE19B4 /* Pods-MeliDevSDKTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MeliDevSDKTests/Info.plist;
+				INFOPLIST_FILE = Example/MeliDevSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mercadolibre.MeliDevSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -488,9 +501,10 @@
 		};
 		57FB7E401D706DB600454AB5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 653E4D79F80CDB72CB0995D5 /* Pods-MeliDevSDKTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MeliDevSDKTests/Info.plist;
+				INFOPLIST_FILE = Example/MeliDevSDK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mercadolibre.MeliDevSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

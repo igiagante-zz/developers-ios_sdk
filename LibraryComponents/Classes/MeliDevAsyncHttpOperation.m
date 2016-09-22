@@ -1,18 +1,18 @@
 //
-//  AsyncHttpOperation.m
+//  MeliDevAsyncHttpOperation.m
 //  Pods
 //
 //  Created by Ignacio Giagante on 21/9/16.
 //
 //
 
-#import "AsyncHttpOperation.h"
+#import "MeliDevAsyncHttpOperation.h"
 #import "MeliDevErrors.h"
 #import <AFNetworking.h>
 
 NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
 
-@implementation AsyncHttpOperation
+@implementation MeliDevAsyncHttpOperation
 
 - (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler {
     
@@ -27,7 +27,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+    url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
     NSURL *URL = [NSURL URLWithString: url];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -39,7 +39,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+    url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
     NSURL *URL = [NSURL URLWithString: url];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -65,7 +65,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+    url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
     return [NSURL URLWithString: url];
 }
@@ -74,7 +74,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
-    url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+    url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
     NSURL *URL = [NSURL URLWithString: url];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

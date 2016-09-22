@@ -39,9 +39,5 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>MeliAppId</key>
-	<string>5197208004815569</string>
-	<key>MeliRedirectUrl</key>
-	<string>https://www.example.com</string>
 </dict>
 </plist>

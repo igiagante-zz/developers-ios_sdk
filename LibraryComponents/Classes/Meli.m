@@ -7,9 +7,9 @@
 //
 
 #import "Meli.h"
-#import "Identity.h"
+#import "MeliDevIdentity.h"
 #import "MeliDevLoginViewController.h"
-#import "Utils.h"
+#import "MeliDevUtils.h"
 #import "MeliDevErrors.h"
 
 static NSString const * MELI_REDIRECT_URL_KEY = @"MeliRedirectUrl";
@@ -25,29 +25,16 @@ static NSString const * REDIRECT_URL_IS_NOT_VALID_KEY = @"Redirect URL is not va
 
 @implementation Meli
 
-static Identity * identity;
-static NSString * clientId;
-static NSString * redirectUrl;
+static NSString * _clientId;
+static NSString * _redirectUrl;
+
+static MeliDevIdentity * identity;
 static NSDictionary *dictionary;
 static BOOL isSDKInitialized = NO;
 
-+ (void) initSDK {
++ (MeliDevIdentity *) getMeliDevIdentity {
     
-    NSError *error;
-    if(!isSDKInitialized) {
-        [self startSDK: &error];
-    }
-    
-    if(error) {
-        NSLog(@"Domain: %@", error.domain);
-        NSLog(@"Error Code: %ld", error.code);
-        NSLog(@"Description: %@", [error localizedDescription]);
-    }
-}
-
-+ (Identity *) getIdentity {
-    
-    identity = [Identity restoreIdentity];
+    identity = [MeliDevIdentity restoreMeliDevIdentity: _clientId];
     
     if(identity.clientId) {
         return identity;
@@ -56,14 +43,21 @@ static BOOL isSDKInitialized = NO;
     }
 }
 
-+ (void) startSDK: (NSError **) error {
-    dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    
-    clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
-    redirectUrl = [dictionary valueForKey: MELI_REDIRECT_URL_KEY];
++ (NSString *) getClientId {
+    return _clientId;
+}
+
++ (NSString *) getRedirectUrl {
+    return _redirectUrl;
+}
+
++ (void) startSDK: (NSString *) clientId withRedirectUrl:(NSString *) redirectUrl error:(NSError **) error {
     
     [self verifyAppID:clientId error: &error];
     [self verifyRedirectUrl:redirectUrl error: &error];
+    
+    _clientId = clientId;
+    _redirectUrl = redirectUrl;
     
     isSDKInitialized = YES;
 }
@@ -76,7 +70,7 @@ static BOOL isSDKInitialized = NO;
         *error = [NSError errorWithDomain:MeliDevErrorDomain
                                      code:AppIdIsNotDefinedError
                                  userInfo:userInfo];
-    } else if( [Utils isNumeric: appId] ) {
+    } else if( [MeliDevUtils isNumeric: appId] ) {
         NSLog(@"App ID correct %@", appId);
     } else {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: APP_ID_IS_NOT_NUMERIC_KEY};
@@ -96,7 +90,7 @@ static BOOL isSDKInitialized = NO;
         *error = [NSError errorWithDomain:MeliDevErrorDomain
                                      code:RedirectUrlIsNotDefinedError
                                  userInfo:userInfo];
-    } else if( [Utils validateUrl: redirectUrl] ) {
+    } else if( [MeliDevUtils validateUrl: redirectUrl] ) {
         NSLog(@"Redirect URL is valid %@", redirectUrl);
     } else {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: REDIRECT_URL_IS_NOT_VALID_KEY};
@@ -110,11 +104,12 @@ static BOOL isSDKInitialized = NO;
 + (void) startLogin: (UIViewController *) clientViewController {
     
         MeliDevLoginViewController * loginViewController = [[MeliDevLoginViewController alloc]init];
-        loginViewController.redirectUrl = redirectUrl;
-        loginViewController.appId = clientId;
+        loginViewController.redirectUrl = _redirectUrl;
+        loginViewController.appId = _clientId;
         
         loginViewController.onLoginCompleted = ^(NSDictionary *data){
-            [Identity createIdentity:data];
+            [data setValue: _clientId forKey:MELI_APP_ID_KEY];
+            [MeliDevIdentity createMeliDevIdentity:data];
         };
         
         loginViewController.onErrorDetected = ^(NSString *error){

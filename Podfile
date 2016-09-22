@@ -8,3 +8,9 @@ target 'MeliDevSDK' do
   pod 'AFNetworking', '~> 3.0'
 
 end
+
+target 'MeliDevSDKTests' do
+    
+    pod 'MeliDevSDK', :path => "./"
+    
+end

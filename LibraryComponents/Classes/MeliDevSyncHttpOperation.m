@@ -1,17 +1,17 @@
 //
-//  SyncHttpOperation.m
+//  MeliDevSyncHttpOperation.m
 //  Pods
 //
 //  Created by Ignacio Giagante on 16/9/16.
 //
 //
 
-#import "SyncHttpOperation.h"
+#import "MeliDevSyncHttpOperation.h"
 #import "MeliDevErrors.h"
 
-static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
+static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli MeliDevIdentity is nil";
 
-@implementation SyncHttpOperation
+@implementation MeliDevSyncHttpOperation
 
 - (NSString *) execute: (NSMutableURLRequest *)request error: (NSError **) error {
     
@@ -44,7 +44,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey: MELI_IDENTITY_NIL_MESSAGE};
     
     *error = [NSError errorWithDomain:MeliDevErrorDomain
-                                         code:MeliIdentityIsNil
+                                         code:MeliMeliDevIdentityIsNil
                                      userInfo:userInfo];
 }
 
@@ -68,7 +68,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
         
         NSString * url = [MELI_API_URL stringByAppendingString:path];
         url = [url stringByAppendingString: @"?access_token="];
-        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+        url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"GET"];
@@ -87,7 +87,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
         
         NSString * url = [MELI_API_URL stringByAppendingString:path];
         url = [url stringByAppendingString: @"?access_token="];
-        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+        url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"DELETE"];
@@ -106,7 +106,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
     
         NSString * url = [MELI_API_URL stringByAppendingString:path];
         url = [url stringByAppendingString: @"?access_token="];
-        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+        url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"POST"];
@@ -127,7 +127,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
     
         NSString * url = [MELI_API_URL stringByAppendingString:path];
         url = [url stringByAppendingString: @"?access_token="];
-        url = [url stringByAppendingString: self.identity.getAccessTokenValue];
+        url = [url stringByAppendingString: self.identity.getMeliDevAccessTokenValue];
     
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setHTTPMethod:@"PUT"];

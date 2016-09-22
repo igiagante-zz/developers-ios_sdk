@@ -7,7 +7,7 @@
 //
 
 #import "MeliDevLoginViewController.h"
-#import "Identity.h"
+#import "MeliDevIdentity.h"
 #import "MBProgressHUD.h"
 
 const NSString * LOGIN_URL = @"http://auth.mercadolibre.com/authorization?response_type=token&client_id=";
@@ -18,7 +18,7 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) MBProgressHUD *HUD;
-@property (nonatomic) Identity * identity;
+@property (nonatomic) MeliDevIdentity * identity;
 
 - (void *) createParamDictionary: (NSString *) urlString;
 
@@ -54,7 +54,7 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
     
     if([urlString containsString:self.redirectUrl]) {
         NSArray * parts = [urlString componentsSeparatedByString:@"#"];
-        [self getIdentityData:parts[1]];
+        [self getMeliDevIdentityData:parts[1]];
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -64,7 +64,7 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
     return YES;
 }
 
-- (void *) getIdentityData: (NSString *) urlString {
+- (void *) getMeliDevIdentityData: (NSString *) urlString {
     
     NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
     NSArray *urlComponents = [urlString componentsSeparatedByString:@"&"];

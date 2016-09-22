@@ -1,42 +1,41 @@
 //
-//  Identity.m
+//  MeliDevIdentity.m
 //  Pods
 //
 //  Created by Ignacio Giagante on 1/9/16.
 //
 //
 
-#import "Identity.h"
+#import "MeliDevIdentity.h"
 #import "Meli.h"
 
 const NSString * ACCESS_TOKEN = @"access_token";
 const NSString * EXPIRES_IN = @"expires_in";
 const NSString * USER_ID = @"user_id";
 
-@implementation Identity
+@implementation MeliDevIdentity
 
-- (NSString *) getAccessTokenValue {
+- (NSString *) getMeliDevAccessTokenValue {
     return _accessToken.accessTokenValue;
 }
 
-+ (void) createIdentity:(NSDictionary *) loginData {
++ (void) createMeliDevIdentity:(NSDictionary *) loginData {
     
-    Identity * identity = [[Identity alloc]init];
-    
-    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    identity.clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
+    MeliDevIdentity * identity = [[MeliDevIdentity alloc]init];
     identity.userId = [loginData valueForKey:USER_ID];
     
     NSString * accessTokenValue = [loginData valueForKey:ACCESS_TOKEN];
     NSString * expiresInValue = [loginData valueForKey:EXPIRES_IN];
     
-    AccessToken *accessToken = [[AccessToken alloc] initWithAccessToken:accessTokenValue andExpiresIn:expiresInValue];
+    MeliDevAccessToken *accessToken = [[MeliDevAccessToken alloc] initWithMeliDevAccessToken:accessTokenValue andExpiresIn:expiresInValue];
     identity.accessToken = accessToken;
     
-    [identity storeIdentity];
+    identity.clientId = [loginData valueForKey: MELI_APP_ID_KEY];
+    
+    [identity storeMeliDevIdentity];
 }
 
-- (void) storeIdentity {
+- (void) storeMeliDevIdentity {
     
     NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
     
@@ -51,11 +50,8 @@ const NSString * USER_ID = @"user_id";
     NSLog(@"%@", @"The identity was saved correctly");
 }
 
-+ (Identity *) restoreIdentity {
-    
-    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    NSString *clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
-    
++ (MeliDevIdentity *) restoreMeliDevIdentity: (NSString *) clientId {
+
     NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
     NSString *clientIdSaved = [defaults valueForKey: CLIENT_ID];
     
@@ -64,13 +60,13 @@ const NSString * USER_ID = @"user_id";
         return nil;
     }
     
-    Identity * identity = [[Identity alloc]init];
+    MeliDevIdentity * identity = [[MeliDevIdentity alloc]init];
     identity.clientId = clientId;
     
     NSString * accessTokenValue = [defaults valueForKey:ACCESS_TOKEN];
     NSString * expiresInValue = [defaults valueForKey:EXPIRES_IN];
     
-    AccessToken *accessToken = [[AccessToken alloc] initWithAccessToken:accessTokenValue andExpiresIn:expiresInValue];
+    MeliDevAccessToken *accessToken = [[MeliDevAccessToken alloc] initWithMeliDevAccessToken:accessTokenValue andExpiresIn:expiresInValue];
     identity.accessToken = accessToken;
     
     if([accessToken isTokenExpired]) {

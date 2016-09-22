@@ -13,6 +13,6 @@ enum {
     RedirectUrlNotValidError,
     AppIdIsNotDefinedError,
     RedirectUrlIsNotDefinedError,
-    MeliIdentityIsNil,
+    MeliMeliDevIdentityIsNil,
     HttpRequestError,
 };

@@ -1,5 +1,5 @@
 //
-//  AsyncHttpOperation.h
+//  MeliDevAsyncHttpOperation.h
 //  Pods
 //
 //  Created by Ignacio Giagante on 21/9/16.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Identity.h"
+#import "MeliDevIdentity.h"
 
 typedef void (^SuccessHandler) (NSURLSessionTask *task, id responseObject);
 typedef void (^FailureHandler) (NSURLSessionTask *operation, NSError *error);
 
-@interface AsyncHttpOperation : NSObject
+@interface MeliDevAsyncHttpOperation : NSObject
 
-@property (nonatomic) Identity * identity;
+@property (nonatomic) MeliDevIdentity * identity;
 
 - (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 - (void) getWithAuth: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
