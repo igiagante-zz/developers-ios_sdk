@@ -16,10 +16,9 @@ typedef void (^FailureHandler) (NSURLSessionTask *operation, NSError *error);
 
 @property (nonatomic) Identity * identity;
 
-+(instancetype) asyncHttpOperation;
-
 - (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 - (void) getWithAuth: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 - (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler;
+- (void) delete: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 
 @end

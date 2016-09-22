@@ -13,17 +13,6 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
 
 @implementation SyncHttpOperation
 
-+(instancetype) syncHttpOperation
-{
-    static SyncHttpOperation * syncHttpOperation = nil;
-    static dispatch_once_t one = 0;
-    dispatch_once(&one, ^{
-        syncHttpOperation = [[SyncHttpOperation alloc]init];
-    });
-
-    return syncHttpOperation;
-}
-
 - (NSString *) execute: (NSMutableURLRequest *)request error: (NSError **) error {
     
     NSHTTPURLResponse *responseCode = nil;

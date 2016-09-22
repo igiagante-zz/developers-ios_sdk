@@ -14,10 +14,8 @@ static NSString const * MELI_APP_ID_KEY = @"MeliAppId";
 
 @interface Meli : NSObject
 
-+ (instancetype) meli;
-
-- (Identity *) getIdentity;
-- (void) startSDK: (NSError **) error;
-- (void) startLogin: (UIViewController *) clientViewController;
++ (Identity *) getIdentity;
++ (void) startSDK: (NSError **) error;
++ (void) startLogin: (UIViewController *) clientViewController;
 
 @end

@@ -13,6 +13,7 @@
 @property (copy) NSString * accessTokenValue;
 @property (copy) NSString * expiresInValue;
 
-- (id) initWithAccessToken: (NSString *) token and: (NSString *) expiresIn;
+- (id) initWithAccessToken: (NSString *) token andExpiresIn: (NSString *) expiresIn;
+- (BOOL) isTokenExpired;
 
 @end

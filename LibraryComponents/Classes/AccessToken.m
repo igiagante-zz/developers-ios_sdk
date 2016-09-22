@@ -8,16 +8,33 @@
 
 #import "AccessToken.h"
 
+@interface AccessToken ()
+
+@property (nonatomic, strong) NSDate * tokenDateExpiration;
+
+@end
+
 @implementation AccessToken
 
-- (id) initWithAccessToken: (NSString *) token and: (NSString *) expiresIn {
+- (instancetype) initWithAccessToken: (NSString *) token andExpiresIn: (NSString *) expiresIn {
     
     self = [super init];
-    
     if(self) {
         _accessTokenValue = token;
         _expiresInValue = expiresIn;
+        _tokenDateExpiration = [NSDate dateWithTimeIntervalSinceNow:([expiresIn doubleValue])];
     }
+    return self;
+}
+
+- (BOOL) isTokenExpired {
+
+    NSDate *now = [NSDate date];
+    
+    if([now timeIntervalSinceDate:self.tokenDateExpiration] > 0){
+        return YES;
+    }
+    return NO;
 }
 
 @end

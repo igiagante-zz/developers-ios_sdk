@@ -34,13 +34,12 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    Meli *meli = [Meli meli];
-    self.identity = meli.getIdentity;
+    self.identity = [Meli getIdentity];
     
     if(self.identity) {
-        [self testPostAsync];
+        [self getUsersItemsAsync];
     } else {
-        [meli startLogin:self];
+        [Meli startLogin:self];
     }
 }
 
@@ -70,7 +69,7 @@
 
 - (void) getUsersItemsAsync {
     
-    AsyncHttpOperation *httpClient = [AsyncHttpOperation asyncHttpOperation];
+    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/users/221910727/items/search";
     
@@ -79,7 +78,6 @@
     };
     
     FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
-        
         if(error) {
             [self processError:operation error:error];
         }
@@ -88,9 +86,28 @@
     [httpClient getWithAuth:path successHandler:successHandler failureHanlder:failureHandler];
 }
 
+- (void) testDeleteAsync {
+    
+    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    httpClient.identity = self.identity;
+    NSString *path = @"/items/MLA635779960/pictures/939505-MLA25061434619_092016";
+    
+    SuccessHandler successHandler = ^(NSURLSessionTask *task, id responseObject) {
+        [self parseData:responseObject];
+    };
+    
+    FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
+        if(error) {
+            [self processError:operation error:error];
+        }
+    };
+    
+    [httpClient delete:path successHandler:successHandler failureHanlder:failureHandler];
+}
+
 - (void) testPostAsync {
     
-    AsyncHttpOperation *httpClient = [AsyncHttpOperation asyncHttpOperation];
+    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items";
     
@@ -102,7 +119,28 @@
     };
     
     FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
-        
+        if(error) {
+            [self processError:operation error:error];
+        }
+    };
+    
+    [httpClient post:path withBody:params successHandler:successHandler failureHanlder:failureHandler];
+}
+
+- (void) testPutAsync {
+    
+    AsyncHttpOperation *httpClient = [[AsyncHttpOperation alloc] init];
+    httpClient.identity = self.identity;
+    NSString *path = @"/items/MLA635779960";
+    
+    NSError *error;
+    NSDictionary * params = [NSJSONSerialization JSONObjectWithData:[self createJsonDataForPut] options:kNilOptions error:&error];
+    
+    SuccessHandler successHandler = ^(NSURLSessionTask *task, id responseObject) {
+        [self parseData:responseObject];
+    };
+    
+    FailureHandler failureHandler = ^(NSURLSessionTask *operation, NSError *error) {
         if(error) {
             [self processError:operation error:error];
         }
@@ -113,7 +151,7 @@
 
 - (void) getUsersItems {
     NSError *error;
-    SyncHttpOperation *httpClient = [SyncHttpOperation syncHttpOperation];
+    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/users/221910727/items/search";
     NSString * result =[httpClient getWithAuth:path error:&error];
@@ -122,7 +160,7 @@
 
 - (void) testDelete {
     NSError *error;
-    SyncHttpOperation *httpClient = [SyncHttpOperation syncHttpOperation];
+    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960/pictures/939505-MLA25061434619_092016";
     NSString * result =[httpClient delete:path error:&error];
@@ -131,7 +169,7 @@
 
 - (void) testPost {
     NSError *error;
-    SyncHttpOperation *httpClient = [SyncHttpOperation syncHttpOperation];
+    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items";
     NSString * result =[httpClient post:path withBody:[self createJsonDataForPost] error:&error];
@@ -140,7 +178,7 @@
 
 - (void) testPut {
     NSError *error;
-    SyncHttpOperation *httpClient = [SyncHttpOperation syncHttpOperation];
+    SyncHttpOperation *httpClient = [[SyncHttpOperation alloc] init];
     httpClient.identity = self.identity;
     NSString *path = @"/items/MLA635779960";
     NSString * result =[httpClient put:path withBody:[self createJsonDataForPut] error:&error];

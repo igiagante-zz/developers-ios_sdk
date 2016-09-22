@@ -31,13 +31,7 @@ static NSString * redirectUrl;
 static NSDictionary *dictionary;
 static BOOL isSDKInitialized = NO;
 
-+(instancetype) meli
-{
-    static Meli * meli = nil;
-    static dispatch_once_t one = 0;
-    dispatch_once(&one, ^{
-        meli = [[Meli alloc]init];
-    });
++ (void) initSDK {
     
     NSError *error;
     if(!isSDKInitialized) {
@@ -49,11 +43,9 @@ static BOOL isSDKInitialized = NO;
         NSLog(@"Error Code: %ld", error.code);
         NSLog(@"Description: %@", [error localizedDescription]);
     }
-    
-    return meli;
 }
 
-- (Identity *) getIdentity {
++ (Identity *) getIdentity {
     
     identity = [Identity restoreIdentity];
     
@@ -115,7 +107,7 @@ static BOOL isSDKInitialized = NO;
     }
 }
 
-- (void) startLogin: (UIViewController *) clientViewController {
++ (void) startLogin: (UIViewController *) clientViewController {
     
         MeliDevLoginViewController * loginViewController = [[MeliDevLoginViewController alloc]init];
         loginViewController.redirectUrl = redirectUrl;

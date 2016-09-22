@@ -27,11 +27,10 @@ const NSString * USER_ID = @"user_id";
     identity.clientId = [dictionary valueForKey: MELI_APP_ID_KEY];
     identity.userId = [loginData valueForKey:USER_ID];
     
-    AccessToken *accessToken = [[AccessToken alloc]init];
-    accessToken = accessToken;
-    accessToken.accessTokenValue = [loginData valueForKey:ACCESS_TOKEN];
-    accessToken.expiresInValue = [loginData valueForKey:EXPIRES_IN];
+    NSString * accessTokenValue = [loginData valueForKey:ACCESS_TOKEN];
+    NSString * expiresInValue = [loginData valueForKey:EXPIRES_IN];
     
+    AccessToken *accessToken = [[AccessToken alloc] initWithAccessToken:accessTokenValue andExpiresIn:expiresInValue];
     identity.accessToken = accessToken;
     
     [identity storeIdentity];
@@ -68,44 +67,17 @@ const NSString * USER_ID = @"user_id";
     Identity * identity = [[Identity alloc]init];
     identity.clientId = clientId;
     
-    AccessToken *accessToken = [[AccessToken alloc]init];
-    accessToken = accessToken;
-    accessToken.accessTokenValue = [defaults valueForKey:ACCESS_TOKEN];
-    accessToken.expiresInValue = [defaults valueForKey:EXPIRES_IN];
+    NSString * accessTokenValue = [defaults valueForKey:ACCESS_TOKEN];
+    NSString * expiresInValue = [defaults valueForKey:EXPIRES_IN];
     
+    AccessToken *accessToken = [[AccessToken alloc] initWithAccessToken:accessTokenValue andExpiresIn:expiresInValue];
     identity.accessToken = accessToken;
     
-    if([self isTokenExpired: accessToken.expiresInValue]) {
+    if([accessToken isTokenExpired]) {
         identity = nil;
     }
     
     return identity;
-}
-
-+ (BOOL) isTokenExpired: (NSString *) expiresInValue{
-    NSString * expiresIn = expiresInValue;
-    if(expiresIn) {
-        NSDate *tokenDate = [NSDate dateWithTimeIntervalSinceNow:([expiresIn doubleValue] / 1000)];
-        NSDate *now = [NSDate date];
-        
-        if([self compareDates:tokenDate otherDay:now]){
-            return YES;
-        }
-    }
-    return NO;
-}
-
-+ (BOOL)compareDates:(NSDate*)date1 otherDay:(NSDate*)date2 {
-    
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
-    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
-    
-    return [comp1 day] > [comp2 day] &&
-    [comp1 month] > [comp2 month] &&
-    [comp1 year]  > [comp2 year];
 }
 
 @end

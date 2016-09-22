@@ -16,8 +16,6 @@ static NSString * const HTTP_REQUEST_ERROR_MESSAGE = @"Error getting %@, HTTP st
 
 @property (nonatomic) Identity * identity;
 
-+(instancetype) syncHttpOperation;
-
 - (NSString *) get: (NSString *)path error: (NSError **) error;
 - (NSString *) getWithAuth: (NSString *)path error: (NSError **) error;
 - (NSString *) delete: (NSString *)path error: (NSError **) error;
