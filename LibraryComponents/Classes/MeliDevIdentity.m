@@ -15,7 +15,7 @@
     return _accessToken.accessTokenValue;
 }
 
-+ (void) createMeliDevIdentity:(NSDictionary *) loginData {
++ (void) createIdentity:(NSDictionary *) loginData {
     
     MeliDevIdentity * identity = [[MeliDevIdentity alloc]init];
     identity.userId = [loginData valueForKey:USER_ID];
@@ -28,10 +28,10 @@
     
     identity.clientId = [loginData valueForKey: MELI_APP_ID_KEY];
     
-    [identity storeMeliDevIdentity];
+    [identity storeIdentity];
 }
 
-- (void) storeMeliDevIdentity {
+- (void) storeIdentity {
     
     NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
     
@@ -46,7 +46,7 @@
     NSLog(@"%@", @"The identity was saved correctly");
 }
 
-+ (MeliDevIdentity *) restoreMeliDevIdentity: (NSString *) clientId {
++ (MeliDevIdentity *) restoreIdentity: (NSString *) clientId {
 
     NSUserDefaults *defaults = [[NSUserDefaults alloc]init];
     NSString *clientIdSaved = [defaults valueForKey: CLIENT_ID];

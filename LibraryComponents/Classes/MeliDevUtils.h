@@ -10,7 +10,18 @@
 
 @interface MeliDevUtils : NSObject
 
+/**
+ *  Used to validate if an url is valid.
+ *
+ *  @param candidate
+ */
 + (BOOL) validateUrl: (NSString *) candidate;
+
+/**
+ *  Used to validate if an string is numeric.
+ *
+ *  @param candidate
+ */
 + (BOOL) isNumeric: (NSString *) candidate;
 
 @end

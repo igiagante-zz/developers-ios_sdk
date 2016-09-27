@@ -44,7 +44,7 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey: MELI_IDENTITY_NIL_MESSAGE};
     
     *error = [NSError errorWithDomain:MeliDevErrorDomain
-                                         code:MeliMeliDevIdentityIsNil
+                                         code:MeliIdentityIsNil
                                      userInfo:userInfo];
 }
 

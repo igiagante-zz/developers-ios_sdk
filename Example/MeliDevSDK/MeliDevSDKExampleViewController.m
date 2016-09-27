@@ -46,7 +46,7 @@ static NSString * REDIRECT_URL_VALUE = @"https://www.example.com";
         NSLog(@"Description: %@", [error localizedDescription]);
     }
 
-    self.identity = [Meli getMeliDevIdentity];
+    self.identity = [Meli getIdentity];
     
     if(self.identity) {
         [self getUsersItemsAsync];
