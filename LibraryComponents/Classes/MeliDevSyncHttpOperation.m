@@ -9,7 +9,7 @@
 #import "MeliDevSyncHttpOperation.h"
 #import "MeliDevErrors.h"
 
-static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli MeliDevIdentity is nil";
+static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
 
 @implementation MeliDevSyncHttpOperation
 

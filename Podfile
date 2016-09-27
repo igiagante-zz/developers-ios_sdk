@@ -12,5 +12,5 @@ end
 target 'MeliDevSDKTests' do
     
     pod 'MeliDevSDK', :path => "./"
-    
+    pod 'OCMock'
 end

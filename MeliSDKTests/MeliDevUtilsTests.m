@@ -46,7 +46,7 @@
 - (void)testIsNumeric_withInvalidNumber_shouldReturnNo {
     
     NSString * number = @"45236adr/23462345";
-    XCTAssertTrue([MeliDevUtils isNumeric: number]);
+    XCTAssertFalse([MeliDevUtils isNumeric: number]);
 }
 
 

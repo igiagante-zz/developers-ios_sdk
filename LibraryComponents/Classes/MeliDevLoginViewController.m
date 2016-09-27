@@ -19,12 +19,22 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
 @property (unsafe_unretained, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property (nonatomic) MeliDevIdentity * identity;
+@property (copy) NSString * redirectUrl;
 
 - (void *) createParamDictionary: (NSString *) urlString;
 
 @end
 
 @implementation MeliDevLoginViewController
+
+- (instancetype) initWithRedirectUrl: (NSString *) redirectUrl {
+    
+    self = [super init];
+    if (self) {
+        _redirectUrl = redirectUrl;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,11 +60,9 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
     NSURL *url = [request URL];
     NSString *urlString = url.absoluteString;
     
-    NSLog(@"Url: %@", urlString);
-    
     if([urlString containsString:self.redirectUrl]) {
-        NSArray * parts = [urlString componentsSeparatedByString:@"#"];
-        [self getMeliDevIdentityData:parts[1]];
+        NSArray * urlParts = [urlString componentsSeparatedByString:@"#"];
+        [self getIdentityData: urlParts[1]];
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -64,10 +72,10 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
     return YES;
 }
 
-- (void *) getMeliDevIdentityData: (NSString *) urlString {
+- (void *) getIdentityData: (NSString *) urlParams {
     
     NSMutableDictionary *queryStringDictionary = [[NSMutableDictionary alloc] init];
-    NSArray *urlComponents = [urlString componentsSeparatedByString:@"&"];
+    NSArray *urlComponents = [urlParams componentsSeparatedByString:@"&"];
     
     for (NSString *keyValuePair in urlComponents)
     {
@@ -78,15 +86,18 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
         [queryStringDictionary setObject:value forKey:key];
     }
 
-    self.onLoginCompleted(queryStringDictionary);
+    if([queryStringDictionary count] != 0 && [self checkIfPropertiesExist:queryStringDictionary]) {
+        self.onLoginCompleted(queryStringDictionary);
+    } else {
+        self.onErrorDetected(@"Something was wrong!");
+    }
+    
     [self.HUD hideAnimated:TRUE];
 }
 
-- (NSString *)valueForKey:(NSString *)key fromQueryItems:(NSArray *)queryItems
-{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@", key];
-    NSURLQueryItem *queryItem = [[queryItems filteredArrayUsingPredicate:predicate] firstObject];
-    return queryItem.value;
+- (BOOL) checkIfPropertiesExist: (NSDictionary *) data {
+    BOOL test = [data objectForKey:USER_ID] != nil && [data objectForKey:ACCESS_TOKEN] != nil && [data objectForKey:EXPIRES_IN] != nil;
+    return test;
 }
 
 @end

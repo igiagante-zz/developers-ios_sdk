@@ -9,10 +9,6 @@
 #import "MeliDevIdentity.h"
 #import "Meli.h"
 
-const NSString * ACCESS_TOKEN = @"access_token";
-const NSString * EXPIRES_IN = @"expires_in";
-const NSString * USER_ID = @"user_id";
-
 @implementation MeliDevIdentity
 
 - (NSString *) getMeliDevAccessTokenValue {

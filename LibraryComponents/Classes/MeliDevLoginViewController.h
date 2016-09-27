@@ -13,9 +13,12 @@ typedef void (^OnLoginErrorDetected)(NSString *);
 
 @interface MeliDevLoginViewController : UIViewController
 
-@property (copy) NSString * redirectUrl;
 @property (copy) NSString * appId;
 @property (nonatomic, copy) OnLoginCompleted onLoginCompleted;
 @property (nonatomic, copy) OnLoginErrorDetected onErrorDetected;
+
+- (instancetype) initWithRedirectUrl: (NSString *) redirectUrl;
+- (void *) getIdentityData: (NSString *) urlString;
+- (BOOL) checkIfPropertiesExist: (NSDictionary *) data;
 
 @end

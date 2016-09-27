@@ -103,8 +103,7 @@ static BOOL isSDKInitialized = NO;
 
 + (void) startLogin: (UIViewController *) clientViewController {
     
-        MeliDevLoginViewController * loginViewController = [[MeliDevLoginViewController alloc]init];
-        loginViewController.redirectUrl = _redirectUrl;
+        MeliDevLoginViewController * loginViewController = [[MeliDevLoginViewController alloc] initWithRedirectUrl: _redirectUrl];
         loginViewController.appId = _clientId;
         
         loginViewController.onLoginCompleted = ^(NSDictionary *data){

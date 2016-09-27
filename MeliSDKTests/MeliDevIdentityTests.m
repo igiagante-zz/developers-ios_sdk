@@ -15,6 +15,7 @@ static NSString * ACCESS_TOKEN = @"access_token";
 static NSString * EXPIRES_IN = @"expires_in";
 
 static NSString * MELI_APP_ID_VALUE = @"7230677288562808";
+static NSString * OTHER_MELI_APP_ID_VALUE = @"5197208004815569";
 static NSString * USER_ID_VALUE = @"2277711";
 static NSString * ACCESS_TOKEN_VALUE = @"token";
 static NSString * EXPIRES_IN_VALUE = @"21600";
@@ -45,19 +46,18 @@ static NSString * EXPIRES_IN_VALUE = @"21600";
 
 - (void) testRestoreMeliDevIdentity_withLoginData_shouldReturnMeliDevIdentity {
     
-    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"]];
-    NSString * clientId = [dictionary valueForKey: @"MeliAppId"];
-    
-    MeliDevIdentity * identity = [MeliDevIdentity restoreMeliDevIdentity];
+    MeliDevIdentity * identity = [MeliDevIdentity restoreMeliDevIdentity: MELI_APP_ID_VALUE];
     
     XCTAssertNotNil(identity, @"The identity should not be nil");
-    XCTAssertTrue([identity.clientId isEqualToString:clientId]);
-    XCTAssertTrue([identity.getMeliDevAccessTokenValue isEqualToString:ACCESS_TOKEN_VALUE]);
-    XCTAssertTrue([identity.accessToken.expiresInValue isEqualToString:EXPIRES_IN_VALUE]);
+    XCTAssertTrue([identity.clientId isEqualToString: MELI_APP_ID_VALUE]);
+    XCTAssertTrue([identity.getMeliDevAccessTokenValue isEqualToString: ACCESS_TOKEN_VALUE]);
+    XCTAssertTrue([identity.accessToken.expiresInValue isEqualToString: EXPIRES_IN_VALUE]);
 }
 
 - (void) testRestoreMeliDevIdentity_withClientIdChanged_shouldReturnNil {
     
+    MeliDevIdentity * identity = [MeliDevIdentity restoreMeliDevIdentity: OTHER_MELI_APP_ID_VALUE];
+    XCTAssertNil(identity, @"The identity should be nil");
 }
 
 @end

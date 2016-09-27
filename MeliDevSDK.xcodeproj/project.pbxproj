@@ -10,6 +10,7 @@
 		572574841D9458A800F9FB57 /* MeliDevUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */; };
 		572574861D94609700F9FB57 /* MeliDevAccessTokenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */; };
 		572574881D94667C00F9FB57 /* MeliDevIdentityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */; };
+		5725748E1D9AAC8500F9FB57 /* MeliDevLoginViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5725748D1D9AAC8500F9FB57 /* MeliDevLoginViewControllerTests.m */; };
 		57FB7E581D70804E00454AB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E501D70804E00454AB5 /* AppDelegate.m */; };
 		57FB7E591D70804E00454AB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57FB7E511D70804E00454AB5 /* Assets.xcassets */; };
 		57FB7E5B1D70804E00454AB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 57FB7E541D70804E00454AB5 /* main.m */; };
@@ -34,6 +35,7 @@
 		572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevUtilsTests.m; sourceTree = "<group>"; };
 		572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevAccessTokenTests.m; sourceTree = "<group>"; };
 		572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevIdentityTests.m; sourceTree = "<group>"; };
+		5725748D1D9AAC8500F9FB57 /* MeliDevLoginViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeliDevLoginViewControllerTests.m; sourceTree = "<group>"; };
 		57FB7E191D706DB600454AB5 /* MeliDevSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeliDevSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57FB7E1D1D706DB600454AB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		57FB7E321D706DB600454AB5 /* MeliDevSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeliDevSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +80,7 @@
 				572574831D9458A800F9FB57 /* MeliDevUtilsTests.m */,
 				572574851D94609700F9FB57 /* MeliDevAccessTokenTests.m */,
 				572574871D94667C00F9FB57 /* MeliDevIdentityTests.m */,
+				5725748D1D9AAC8500F9FB57 /* MeliDevLoginViewControllerTests.m */,
 			);
 			path = MeliSDKTests;
 			sourceTree = SOURCE_ROOT;
@@ -363,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5725748E1D9AAC8500F9FB57 /* MeliDevLoginViewControllerTests.m in Sources */,
 				572574861D94609700F9FB57 /* MeliDevAccessTokenTests.m in Sources */,
 				572574881D94667C00F9FB57 /* MeliDevIdentityTests.m in Sources */,
 				572574841D9458A800F9FB57 /* MeliDevUtilsTests.m in Sources */,

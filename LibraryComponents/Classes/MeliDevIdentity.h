@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "MeliDevAccessToken.h"
 
-static NSString const * CLIENT_ID = @"app_id";
+static NSString * const CLIENT_ID = @"app_id";
+static NSString * const ACCESS_TOKEN = @"access_token";
+static NSString * const EXPIRES_IN = @"expires_in";
+static NSString * const USER_ID = @"user_id";
 
 @interface MeliDevIdentity : NSObject
 
