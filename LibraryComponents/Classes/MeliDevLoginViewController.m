@@ -40,6 +40,8 @@ const NSString * CALLBACK_MESSAGE_DISPATCH = @"background_message_dispatch";
     [super viewDidLoad];
     
     _webView.delegate = self;
+    _webView.opaque = NO;
+    _webView.backgroundColor = [UIColor colorWithRed: 1.0f green: 1.0f blue: 0.0f alpha:1.0f];
     
     NSString *urlLogin = [LOGIN_URL stringByAppendingString:_appId];
     NSURL *url = [NSURL URLWithString:urlLogin];

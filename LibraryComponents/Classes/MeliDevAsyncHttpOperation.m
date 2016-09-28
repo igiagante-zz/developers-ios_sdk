@@ -14,6 +14,15 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
 
 @implementation MeliDevAsyncHttpOperation
 
+- (instancetype) initWithIdentity: (MeliDevIdentity *) identity {
+    
+    self = [super init];
+    if (self) {
+        _identity = identity;
+    }
+    return self;
+}
+
 - (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler {
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];

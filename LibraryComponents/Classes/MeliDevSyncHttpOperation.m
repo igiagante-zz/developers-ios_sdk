@@ -13,15 +13,39 @@ static NSString const * MELI_IDENTITY_NIL_MESSAGE = @"Meli Identity is nil";
 
 @implementation MeliDevSyncHttpOperation
 
+- (instancetype) initWithIdentity: (MeliDevIdentity *) identity {
+    
+    self = [super init];
+    if (self) {
+        _identity = identity;
+    }
+    return self;
+}
+
 - (NSString *) execute: (NSMutableURLRequest *)request error: (NSError **) error {
     
     NSHTTPURLResponse *responseCode = nil;
     
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     
+    if([responseCode statusCode] == 401){
+        
+        NSString * requestError = [NSString stringWithFormat:HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode]];
+        
+        NSLog(HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode]);
+        
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: requestError};
+        
+        *error = [NSError errorWithDomain:MeliDevErrorDomain
+                                     code:InvalidAccessToken
+                                 userInfo:userInfo];
+        
+        return nil;
+    }
+    
     if(!([responseCode statusCode] == 200 || [responseCode statusCode] == 201)){
         
-        NSString * requestError = [NSString stringWithFormat:HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode] ];
+        NSString * requestError = [NSString stringWithFormat:HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode]];
         
         NSLog(HTTP_REQUEST_ERROR_MESSAGE, [request URL], [responseCode statusCode]);
         

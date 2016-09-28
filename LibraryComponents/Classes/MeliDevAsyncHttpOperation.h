@@ -29,9 +29,17 @@ typedef void (^FailureHandler) (NSURLSessionTask *operation, NSError *error);
 
 @property (nonatomic) MeliDevIdentity * identity;
 
+/**
+ *  Create a MeliDevSyncHttpOperation instance.
+ *
+ *  @param identity       Model that represents user's identification.
+ */
+- (instancetype) initWithIdentity: (MeliDevIdentity *) identity;
+
 - (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 - (void) getWithAuth: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 - (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler;
+- (void) put: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler;
 - (void) delete: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
 
 @end

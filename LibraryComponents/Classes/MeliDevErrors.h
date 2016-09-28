@@ -18,6 +18,7 @@ static NSString * const MeliDevErrorDomain = @"com.MeliDev.ErrorDomain";
  *  RedirectUrlIsNotInitializedError: when the app id is not initialized. The cliend does not provide the redirect url.
  *  HttpRequestError: when some error happens during a http request.
  *  MeliIdentityIsNil: when the identity was not created before trying to execute a task.
+ *  InvalidAccessToken: when the access token is wrong.
  */
 enum {
     AppIdNotValidError,
@@ -25,5 +26,6 @@ enum {
     AppIdIsNotInitializedError,
     RedirectUrlIsNotInitializedError,
     HttpRequestError,
-    MeliIdentityIsNil
+    MeliIdentityIsNil,
+    InvalidAccessToken,
 };
