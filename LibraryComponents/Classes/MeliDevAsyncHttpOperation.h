@@ -36,10 +36,10 @@ typedef void (^FailureHandler) (NSURLSessionTask *operation, NSError *error);
  */
 - (instancetype) initWithIdentity: (MeliDevIdentity *) identity;
 
-- (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
-- (void) getWithAuth: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
-- (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler;
-- (void) put: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler;
-- (void) delete: (NSString *)path successHandler: successHandler failureHanlder: failureHandler;
+- (void) get: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder:(FailureHandler) failureHandler;
+- (void) getWithAuth: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder:(FailureHandler) failureHandler;
+- (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler:(SuccessHandler) successHandler failureHanlder: (FailureHandler) failureHandler;
+- (void) put: (NSString *)path withBody:(NSDictionary *)params successHandler:(SuccessHandler) successHandler failureHanlder: (FailureHandler) failureHandler;
+- (void) delete: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder:(FailureHandler) failureHandler;
 
 @end

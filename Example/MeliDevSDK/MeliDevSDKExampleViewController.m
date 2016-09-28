@@ -24,7 +24,9 @@ static NSString * REDIRECT_URL_VALUE = @"https://www.example.com";
 @property (copy) NSString * result;
 @property (nonatomic) NSError * error;
 
-- (IBAction)test:(id)sender;
+- (IBAction)login:(id)sender;
+
+- (IBAction)getUsers:(id)sender;
 
 @end
 
@@ -38,7 +40,7 @@ static NSString * REDIRECT_URL_VALUE = @"https://www.example.com";
     [super viewWillAppear:animated];
 }
 
-- (IBAction) test:(id)sender {
+- (IBAction)login:(id)sender {
     
     NSError *error;
     [Meli startSDK: CLIENT_ID_VALUE withRedirectUrl: REDIRECT_URL_VALUE error:&error];
@@ -49,12 +51,14 @@ static NSString * REDIRECT_URL_VALUE = @"https://www.example.com";
         NSLog(@"Description: %@", [error localizedDescription]);
     }
     
-    self.identity = [Meli getIdentity];
+    [Meli startLogin:self];
+}
+
+- (IBAction)getUsers:(id)sender {
     
+    self.identity = [Meli getIdentity];
     if(self.identity) {
         [self getUsersItemsAsync];
-    } else {
-        [Meli startLogin:self];
     }
 }
 

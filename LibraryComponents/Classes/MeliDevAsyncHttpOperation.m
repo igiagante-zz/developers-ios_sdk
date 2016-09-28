@@ -23,7 +23,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     return self;
 }
 
-- (void) get: (NSString *)path successHandler: successHandler failureHanlder: failureHandler {
+- (void) get: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder:(FailureHandler) failureHandler {
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     NSURL *URL = [NSURL URLWithString: url];
@@ -32,7 +32,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     [manager GET:URL.absoluteString parameters:nil progress:nil success: successHandler failure: failureHandler];
 }
 
-- (void) getWithAuth: (NSString *)path successHandler: successHandler failureHanlder: failureHandler {
+- (void) getWithAuth: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder:(FailureHandler) failureHandler {
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
@@ -44,7 +44,7 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     [manager GET:URL.absoluteString parameters:nil progress:nil success: successHandler failure: failureHandler];
 }
 
-- (void) delete: (NSString *)path successHandler: successHandler failureHanlder: failureHandler {
+- (void) delete: (NSString *)path successHandler:(SuccessHandler) successHandler failureHanlder: (FailureHandler) failureHandler {
     
     NSString * url = [MELI_API_URL stringByAppendingString:path];
     url = [url stringByAppendingString: @"?access_token="];
@@ -53,17 +53,17 @@ NSString * const MELI_API_URL = @"https://api.mercadolibre.com";
     NSURL *URL = [NSURL URLWithString: url];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager DELETE:path parameters:nil success:successHandler failure:failureHandler];
+    [manager DELETE:path parameters:nil success:(SuccessHandler) successHandler failure:failureHandler];
 }
 
-- (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler {
+- (void) post: (NSString *)path withBody:(NSDictionary *)params successHandler: (SuccessHandler) successHandler failureHanlder: (FailureHandler) failureHandler {
 
     NSURL *URL = [self getURL:path];
     
     [[self getManager:path] POST:URL.absoluteString parameters:params progress:nil success: successHandler failure: failureHandler];
 }
 
-- (void) put: (NSString *)path withBody:(NSDictionary *)params successHandler: successHandler failureHanlder: failureHandler {
+- (void) put: (NSString *)path withBody:(NSDictionary *)params successHandler: (SuccessHandler) successHandler failureHanlder: (FailureHandler) failureHandler {
 
     NSURL *URL = [self getURL:path];
     
